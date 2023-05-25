@@ -1,3 +1,5 @@
+from tsfresh.feature_extraction import EfficientFCParameters
+
 MINIMAL_FEATURES = {
     "sum_values": None,
     "mean": None,
@@ -8,3 +10,5 @@ MINIMAL_FEATURES = {
     "maximum": None,
     "root_mean_square": None,
 }
+
+EFFICIENT_FEATURES = EfficientFCParameters
