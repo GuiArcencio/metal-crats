@@ -41,7 +41,7 @@ def characterize_dataset(X, y, feature_collection):
     final_features["number_examples"] = instances
     final_features["number_dimensions"] = dims
 
-    return pd.Series(final_features)
+    return pd.DataFrame([final_features])
 
 def _convert_3D_array_to_tsfresh_dataframe(X):
     """
