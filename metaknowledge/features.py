@@ -3,6 +3,7 @@ MINIMAL_FEATURES = {
     "mean": None,
     "median": None,
     "standard_deviation": None,
+    "variance": None,
     "minimum": None,
     "maximum": None,
     "root_mean_square": None,

@@ -1,12 +1,14 @@
 import pandas as pd
+import numpy as np
 
 from tsfresh.feature_extraction import extract_features
 
-def characterize_dataset(X, feature_collection):
+def characterize_dataset(X, y, feature_collection):
     """
         Extract features (given by `feature_collection`) 
         from a single dataset (X, a 3D-array).
     """
+    instances, dims, length = X.shape
     X_df = _convert_3D_array_to_tsfresh_dataframe(X)
 
     features = extract_features(
@@ -18,7 +20,28 @@ def characterize_dataset(X, feature_collection):
         column_value="value"
     )
 
-    return features
+    final_features = dict()
+    for f in feature_collection.keys():
+        all_dims = pd.concat([features[f"{dim}__{f}"] for dim in range(dims)], ignore_index=True)
+        final_features[f"mean_{f}"] = np.mean(all_dims)
+        final_features[f"std_{f}"] = np.std(all_dims)
+    
+    # Label features
+    final_features["label_sum_values"] = np.sum(y)
+    final_features["label_mean"] = np.mean(y)
+    final_features["label_median"] = np.median(y)
+    final_features["label_standard_deviation"] = np.std(y)
+    final_features["label_variance"] = np.var(y)
+    final_features["label_minimum"] = np.min(y)
+    final_features["label_maximum"] = np.max(y)
+    final_features["label_root_mean_square"] = np.sqrt(np.mean(y**2))
+
+    # General features  
+    final_features["time_series_length"] = length
+    final_features["number_examples"] = instances
+    final_features["number_dimensions"] = dims
+
+    return pd.Series(final_features)
 
 def _convert_3D_array_to_tsfresh_dataframe(X):
     """
@@ -26,14 +49,14 @@ def _convert_3D_array_to_tsfresh_dataframe(X):
         that tsfresh can use it.
     """
 
-    instances, dims, timepoints = X.shape
+    instances, dims, length = X.shape
     id = list()
     time = list()
     kind = list()
     value = list()
     for instance in range(instances):
         for dim in range(dims):
-            for t in range(timepoints):
+            for t in range(length):
                 id.append(instance)
                 time.append(t)
                 kind.append(dim)
