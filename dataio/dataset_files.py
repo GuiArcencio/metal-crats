@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 
 from tsml.datasets import load_from_ts_file
 
@@ -13,3 +14,7 @@ def load_dataset(name, path="./assets/datasets"):
     y = np.concatenate([y_train, y_test])
 
     return X, y
+
+def list_datasets(path="./assets/datasets"):
+    datasets = os.listdir(path)
+    return datasets
