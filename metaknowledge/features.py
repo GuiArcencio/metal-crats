@@ -11,4 +11,4 @@ MINIMAL_FEATURES = {
     "root_mean_square": None,
 }
 
-EFFICIENT_FEATURES = EfficientFCParameters
+EFFICIENT_FEATURES = EfficientFCParameters()
