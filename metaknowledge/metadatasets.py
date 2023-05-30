@@ -18,6 +18,10 @@ def create_metadataset(feature_collection, path="./assets/datasets"):
     meta_X['name'] = datasets
     meta_X = meta_X.set_index('name')
 
-    meta_X.to_csv('a.csv')
+    return meta_X
+
+def load_best_regressors(path="./assets/best_regressors.csv"):
+    regressors = pd.read_csv(path)
+    return regressors
 
 
