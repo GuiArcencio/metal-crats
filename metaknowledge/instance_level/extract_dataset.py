@@ -21,10 +21,17 @@ def characterize_dataset(X, y, feature_collection, label_features=True, general_
     )
 
     final_features = dict()
-    for f in feature_collection.keys():
-        all_dims = pd.concat([features[f"{dim}__{f}"] for dim in range(dims)], ignore_index=True)
-        final_features[f"mean_{f}"] = np.mean(all_dims)
-        final_features[f"std_{f}"] = np.std(all_dims)
+    for f in features.columns:
+        feature_name_split = f.split("__")
+        feature_name_proper = "__".join(feature_name_split[1:])
+        if f"mean_{feature_name_proper}" not in final_features:
+            all_dims = pd.concat(
+                [features[f"{dim}__{feature_name_proper}"] 
+                for dim in range(dims)], 
+                ignore_index=True
+            )
+            final_features[f"mean_{feature_name_proper}"] = np.mean(all_dims)
+            final_features[f"std_{feature_name_proper}"] = np.std(all_dims)
     
     # Label features
     if label_features:
