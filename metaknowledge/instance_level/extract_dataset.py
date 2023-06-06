@@ -19,6 +19,7 @@ def characterize_dataset(X, y, feature_collection, label_features=True, general_
         column_sort="time",
         column_value="value"
     )
+    features.fillna(0)
 
     final_features = dict()
     for f in features.columns:
