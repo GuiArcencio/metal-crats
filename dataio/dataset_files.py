@@ -18,3 +18,13 @@ def load_dataset(name, path="./assets/datasets"):
 def list_datasets(path="./assets/datasets"):
     datasets = os.listdir(path)
     return datasets
+
+def load_metadataset(X_filename="efficient.csv", path="./assets/metadataset"):
+    X = pd.read_csv(f"{path}/{X_filename}", index_col="name")
+    y = pd.read_csv("./assets/best_regressors.csv")
+
+    X = X.sort_values(by="name")
+    y = y.sort_values(by="dataset")
+    y = y["best_regressor"].to_numpy()
+
+    return X, y
