@@ -1,3 +1,5 @@
+import numpy as np
+
 from sklearn.pipeline import Pipeline
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.preprocessing import StandardScaler
@@ -44,3 +46,17 @@ def build_metamodel(option="1nn", random_state=None):
     ])
 
     return final_model
+
+def build_baseline(rmses):
+    preds = []
+    for dataset in rmses.columns:
+        preds.append(np.mean(rmses[dataset]))
+
+    return np.array(preds)
+
+def build_topline(rmses):
+    preds = []
+    for dataset in rmses.columns:
+        preds.append(np.min(rmses[dataset]))
+
+    return np.array(preds)
