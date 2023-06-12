@@ -27,6 +27,9 @@ def load_metadataset(X_filename="efficient.csv", path="./assets/metadataset"):
     y = y.sort_values(by="dataset")
     y = y["best_regressor"].to_numpy()
 
+    # TODO: remove this line when results are available
+    X = X.drop("AustraliaRainfall")
+
     return X, y
 
 def load_rmses(path="./assets/rmse.csv"):
