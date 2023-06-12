@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from metamodel import build_metamodel, AVAILABLE_METAMODELS
+from metamodel import build_metamodel, AVAILABLE_METAMODELS, build_baseline, build_topline
 from sklearn.model_selection import LeaveOneOut
 
 def run_model_using_loo(X, y, option="1nn", random_state=None):
@@ -54,4 +54,10 @@ def run_all_metamodels(X, y, rmses):
                 ))
             results[f"metal-rats-{metaoption}"] = np.mean(runs, axis=0)
 
-    return pd.DataFrame(results, index=X.index)
+    results["baseline"] = build_baseline(rmses)
+    results["topline"] = build_topline(rmses)
+
+    final_results = pd.DataFrame(results, index=X.index)
+    final_results = final_results.transpose()
+    final_results = final_results.rename_axis("regressor").rename_axis(mapper=None, axis=1)
+    return final_results
