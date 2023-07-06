@@ -6,7 +6,5 @@ __pycache__/
 *~
 
 assets/regression/datasets/*
-!assets/regression/datasets/Covid3Month
-!assets/regression/datasets/BitcoinSentiment
 
 assets/classification/datasets/*
