@@ -4,6 +4,7 @@ virtualenv/
 __pycache__/
 .python-version
 *~
+tmp/
 
 assets/regression/datasets/*
 
