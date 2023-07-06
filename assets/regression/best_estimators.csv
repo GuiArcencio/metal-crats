@@ -1,4 +1,4 @@
-dataset,best_regressor
+dataset,best_estimator
 AcousticContaminationMadrid-no-missing,FreshPRINCE
 AluminiumConcentration,RotF
 AppliancesEnergy,FreshPRINCE

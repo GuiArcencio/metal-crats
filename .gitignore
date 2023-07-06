@@ -5,6 +5,8 @@ __pycache__/
 .python-version
 *~
 
-assets/datasets/*
-!assets/datasets/Covid3Month
-!assets/datasets/BitcoinSentiment
+assets/regression/datasets/*
+!assets/regression/datasets/Covid3Month
+!assets/regression/datasets/BitcoinSentiment
+
+assets/classification/datasets/*
