@@ -26,7 +26,7 @@ def get_rmse_from_metamodel_prediction(y_pred, rmses):
 
     return np.array(err)
 
-def run_all_metamodels(X, y, rmses):
+def run_all_regression_metamodels(X, y, rmses):
     results = {}
     seeds = [
         5180022, 169332600, 174764313,

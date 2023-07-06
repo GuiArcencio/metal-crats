@@ -3,7 +3,7 @@ import numpy as np
 
 from tsfresh.feature_extraction import extract_features
 
-def characterize_dataset(X, y, feature_collection, label_features=True, general_features=True):
+def characterize_dataset(X, y, feature_collection, label_features=True, problem_type="regression"):
     """
         Extract features (given by `feature_collection`) 
         from a single dataset (X, a 3D-array).
@@ -36,20 +36,23 @@ def characterize_dataset(X, y, feature_collection, label_features=True, general_
     
     # Label features
     if label_features:
-        final_features["label_sum_values"] = np.sum(y)
-        final_features["label_mean"] = np.mean(y)
-        final_features["label_median"] = np.median(y)
-        final_features["label_standard_deviation"] = np.std(y)
-        final_features["label_variance"] = np.var(y)
-        final_features["label_minimum"] = np.min(y)
-        final_features["label_maximum"] = np.max(y)
-        final_features["label_root_mean_square"] = np.sqrt(np.mean(y**2))
+        if problem_type == "regression":
+            final_features["label_sum_values"] = np.sum(y)
+            final_features["label_mean"] = np.mean(y)
+            final_features["label_median"] = np.median(y)
+            final_features["label_standard_deviation"] = np.std(y)
+            final_features["label_variance"] = np.var(y)
+            final_features["label_minimum"] = np.min(y)
+            final_features["label_maximum"] = np.max(y)
+            final_features["label_root_mean_square"] = np.sqrt(np.mean(y**2))
+        else: # classification
+            # TODO: add class features
+            pass
 
     # General features  
-    if general_features:
-        final_features["time_series_length"] = length
-        final_features["number_examples"] = instances
-        final_features["number_dimensions"] = dims
+    final_features["time_series_length"] = length
+    final_features["number_examples"] = instances
+    final_features["number_dimensions"] = dims
 
     return pd.DataFrame([final_features])
 
