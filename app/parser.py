@@ -14,14 +14,14 @@ def build_argparser():
     parser.add_argument(
         "--features",
         choices=["minimal", "efficient", "catch22", "basic"],
-        required=True,
-        help="which feature collection to use"
+        nargs="+",
+        help="which feature collection(s) to use"
     )
     parser.add_argument(
         "--metamodels",
         choices=["1nn", "5nn", "rf", "nb", "svm"],
         nargs="+",
-        help="which model to use for metalearning"
+        help="which model(s) to use for metalearning"
     )
     parser.add_argument(
         "--use-label-features",

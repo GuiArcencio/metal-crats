@@ -4,13 +4,13 @@ import os
 
 from tsml.datasets import load_from_ts_file
 
-def load_dataset(name, regression=True, path=None):
+def load_dataset(name, problem_type="regression", path=None):
     if path is None:
-        path = f"./assets/{'regression' if regression else 'classification'}/datasets"
+        path = f"./assets/{problem_type}/datasets"
 
     X_train, y_train = load_from_ts_file(f"{path}/{name}/{name}_TRAIN.ts")
     X_test, y_test = load_from_ts_file(f"{path}/{name}/{name}_TEST.ts")
-    if regression:
+    if problem_type == "regression":
         y_train = y_train.astype(float)
         y_test = y_test.astype(float)
 
@@ -42,6 +42,12 @@ def load_metadataset(features="efficient", problem_type="regression", path=None)
         X = X.drop("AustraliaRainfall")
 
     return X, y
+
+def write_metadataset(X, features="efficient", problem_type="regression", path=None):
+    if path is None:
+        path = f"./assets/{problem_type}"
+
+    X.to_csv(f"{path}/metadatasets/{features}.csv")
 
 def load_rmses(path="./assets/regression/rmse.csv"):
     rmse = pd.read_csv(path, index_col="regressor")

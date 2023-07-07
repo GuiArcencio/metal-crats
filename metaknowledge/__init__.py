@@ -1,9 +1,8 @@
 __all__ = [
-    "MINIMAL_FEATURES",
-    "EFFICIENT_FEATURES",
+    "FEATURES",
     "create_metadataset",
-    "load_best_regressors"
+    "load_best_estimators"
 ]
 
-from metaknowledge.features import MINIMAL_FEATURES, EFFICIENT_FEATURES
-from metaknowledge.metadatasets import create_metadataset, load_best_regressors
+from metaknowledge.features import FEATURES
+from metaknowledge.metadatasets import create_metadataset, load_best_estimators
