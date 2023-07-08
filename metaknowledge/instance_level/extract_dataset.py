@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 
 from tsfresh.feature_extraction import extract_features
+from pycatch22 import catch22_all
 
 def characterize_dataset(X, y, feature_collection, label_features=True, problem_type="regression"):
     """
@@ -9,17 +10,35 @@ def characterize_dataset(X, y, feature_collection, label_features=True, problem_
         from a single dataset (X, a 3D-array).
     """
     instances, dims, length = X.shape
-    X_df = _convert_3D_array_to_tsfresh_dataframe(X)
 
-    features = extract_features(
-        X_df, 
-        default_fc_parameters=feature_collection,
-        column_id="id",
-        column_kind="kind",
-        column_sort="time",
-        column_value="value"
-    )
-    features = features.fillna(0)
+    if feature_collection is None: # Catch22
+        features = list()
+        for i in range(instances):
+            transformed_dims = list()
+            for dim in range(dims):
+                catch22_results = catch22_all(X[i,dim,:], catch24=True)
+                transformed_dims.append(pd.Series(
+                    catch22_results["values"],
+                    index=[
+                        f"{dim}__{feature_name}" 
+                        for feature_name in catch22_results["names"]
+                    ]
+                ))
+            features.append(pd.concat(transformed_dims))
+
+        features = pd.DataFrame(features)
+    else: # TSFresh
+        X_df = _convert_3D_array_to_tsfresh_dataframe(X)
+
+        features = extract_features(
+            X_df, 
+            default_fc_parameters=feature_collection,
+            column_id="id",
+            column_kind="kind",
+            column_sort="time",
+            column_value="value"
+        )
+        features = features.fillna(0)
 
     final_features = dict()
     for f in features.columns:
@@ -56,7 +75,8 @@ def characterize_dataset(X, y, feature_collection, label_features=True, problem_
     final_features["number_examples"] = instances
     final_features["number_dimensions"] = dims
 
-    return pd.DataFrame([final_features])
+    final_features = pd.DataFrame([final_features])
+    return final_features
 
 def _convert_3D_array_to_tsfresh_dataframe(X):
     """
