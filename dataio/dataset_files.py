@@ -31,7 +31,7 @@ def load_metadataset(features="efficient", problem_type="regression", path=None)
         path = f"./assets/{problem_type}"
 
     X = pd.read_csv(f"{path}/metadatasets/{features}.csv", index_col="name")
-    y = pd.read_csv("{path}/best_estimators.csv")
+    y = pd.read_csv(f"{path}/best_estimators.csv")
 
     X = X.sort_values(by="name")
     y = y.sort_values(by="dataset")
