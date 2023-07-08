@@ -13,7 +13,8 @@ def run_experiment():
         else:
             meta_X = create_metadataset(
                 FEATURES[feature_collection],
-                args.problem_type
+                args.problem_type,
+                use_label_features=True,
             )
             write_metadataset(meta_X, feature_collection, args.problem_type)
             meta_X, meta_y = load_metadataset(feature_collection, args.problem_type)
