@@ -50,7 +50,9 @@ def characterize_dataset(X, y, feature_collection, label_features=True, problem_
             pass
 
     # General features  
-    final_features["time_series_length"] = length
+    if feature_collection is None:
+        # tsfresh features already include ts length
+        final_features["time_series_length"] = length
     final_features["number_examples"] = instances
     final_features["number_dimensions"] = dims
 

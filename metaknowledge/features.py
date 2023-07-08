@@ -1,17 +1,8 @@
-from tsfresh.feature_extraction import EfficientFCParameters, MinimalFCParameters
+from tsfresh.feature_extraction import EfficientFCParameters, MinimalFCParameters, ComprehensiveFCParameters
 
 FEATURES = {
-    "basic": {
-        "sum_values": None,
-        "mean": None,
-        "median": None,
-        "standard_deviation": None,
-        "variance": None,
-        "minimum": None,
-        "maximum": None,
-        "root_mean_square": None,
-    },
     "efficient": EfficientFCParameters(),
     "minimal": MinimalFCParameters(),
+    "comprehensive": ComprehensiveFCParameters(),
     "catch22": None,
 }

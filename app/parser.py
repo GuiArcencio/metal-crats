@@ -13,7 +13,7 @@ def build_argparser():
     )
     parser.add_argument(
         "--features",
-        choices=["minimal", "efficient", "catch22", "basic"],
+        choices=["minimal", "efficient", "comprehensive", "catch22"],
         nargs="+",
         help="which feature collection(s) to use"
     )
