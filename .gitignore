@@ -9,3 +9,5 @@ tmp/
 assets/regression/datasets/*
 
 assets/classification/datasets/*
+
+results/*

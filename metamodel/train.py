@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from metamodel import build_metamodel, AVAILABLE_METAMODELS, build_baseline, build_topline
+from metamodel import build_metamodel
 from sklearn.model_selection import LeaveOneOut
 
 def run_model_using_loo(X, y, option="1nn", random_state=None):
@@ -19,45 +19,16 @@ def run_model_using_loo(X, y, option="1nn", random_state=None):
 
     return preds
 
-def get_rmse_from_metamodel_prediction(y_pred, rmses):
+def best_regressors_to_rmse(y_pred, rmses):
     err = []
-    for model, dataset in zip(y_pred, rmses.columns):
+    for model, dataset in zip(y_pred, sorted(rmses.columns)):
         err.append(rmses[dataset][model])
 
     return np.array(err)
 
-def run_all_regression_metamodels(X, y, rmses):
-    results = {}
-    seeds = [
-        5180022, 169332600, 174764313,
-        350137309, 468180727, 516403885,
-        741233569, 757999656, 812064213, 
-        840293668
-    ]
+def best_classifiers_to_acc(y_pred, accs):
+    acc = []
+    for model, dataset in zip(y_pred, sorted(accs.column)):
+        acc.append(accs[dataset][model])
 
-    for metaoption in AVAILABLE_METAMODELS:
-        print(f"Running metal-rats-{metaoption}")
-
-        if metaoption != "rf":
-            metamodel_rmses = get_rmse_from_metamodel_prediction(
-                run_model_using_loo(X, y, metaoption, None),
-                rmses
-            )
-            results[f"metal-rats-{metaoption}"] = metamodel_rmses
-        else:
-            runs = []
-            for run, seed in enumerate(seeds):
-                print(f"\tRun #{run+1}")
-                runs.append(get_rmse_from_metamodel_prediction(
-                    run_model_using_loo(X, y, metaoption, seed),
-                    rmses
-                ))
-            results[f"metal-rats-{metaoption}"] = np.mean(runs, axis=0)
-
-    results["baseline"] = build_baseline(rmses)
-    results["topline"] = build_topline(rmses)
-
-    final_results = pd.DataFrame(results, index=X.index)
-    final_results = final_results.transpose()
-    final_results = final_results.rename_axis("regressor").rename_axis(mapper=None, axis=1)
-    return final_results
+    return np.array(acc)

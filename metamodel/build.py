@@ -17,8 +17,6 @@ AVAILABLE_METAMODELS = [
 ]
 
 def build_metamodel(option="1nn", random_state=None):
-    assert(option in AVAILABLE_METAMODELS)
-
     feature_selector = VarianceThreshold((1e-5)**2)
     if option == "1nn":
         model = Pipeline([
@@ -47,16 +45,23 @@ def build_metamodel(option="1nn", random_state=None):
 
     return final_model
 
-def build_regression_baseline(rmses):
+def build_baseline(results):
     preds = []
-    for dataset in rmses.columns:
-        preds.append(np.mean(rmses[dataset]))
+    for dataset in sorted(results.columns):
+        preds.append(np.mean(results[dataset]))
 
     return np.array(preds)
 
 def build_regression_topline(rmses):
     preds = []
-    for dataset in rmses.columns:
+    for dataset in sorted(rmses.columns):
         preds.append(np.min(rmses[dataset]))
+
+    return np.array(preds)
+
+def build_classification_topline(accs):
+    preds = []
+    for dataset in sorted(accs.columns):
+        preds.append(np.max(accs[dataset]))
 
     return np.array(preds)
