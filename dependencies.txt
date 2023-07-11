@@ -1,0 +1,7 @@
+aeon
+scikit-learn
+numpy
+pandas
+tqdm
+pycatch22
+tsfresh
