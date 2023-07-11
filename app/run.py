@@ -42,6 +42,9 @@ def reproduce_experiment(problem_type, features, metamodels, use_label_features)
             to_drop = filter(lambda s: s.startswith("label_"), meta_X.columns)
             meta_X = meta_X.drop(to_drop, axis=1)
 
+        if metamodels is None:
+            continue
+        
         for model in metamodels:
             meta_pred = run_model_using_loo(meta_X, meta_y, model, None)
             from sklearn.metrics import accuracy_score
