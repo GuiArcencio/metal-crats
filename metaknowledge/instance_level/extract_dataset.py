@@ -57,17 +57,19 @@ def characterize_dataset(X, y, feature_collection, label_features=True, problem_
     # Label features
     if label_features:
         if problem_type == "regression":
-            final_features["label_sum_values"] = np.sum(y)
             final_features["label_mean"] = np.mean(y)
             final_features["label_median"] = np.median(y)
             final_features["label_standard_deviation"] = np.std(y)
-            final_features["label_variance"] = np.var(y)
             final_features["label_minimum"] = np.min(y)
             final_features["label_maximum"] = np.max(y)
             final_features["label_root_mean_square"] = np.sqrt(np.mean(y**2))
         else: # classification
-            # TODO: add class features
-            pass
+            classes, classes_counts = np.unique(y, return_counts=True)
+            classes_counts = classes_counts / np.sum(classes_counts)
+
+            final_features["label_class_count"] = len(classes)
+            final_features["label_gini_impurity"] = 1 - np.sum(classes_counts**2)
+            final_features["label_entropy"] = -np.sum(classes_counts * np.log2(classes_counts))
 
     # General features  
     if feature_collection is None:

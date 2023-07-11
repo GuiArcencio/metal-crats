@@ -13,6 +13,9 @@ def load_dataset(name, problem_type="regression", path=None):
     if problem_type == "regression":
         y_train = y_train.astype(float)
         y_test = y_test.astype(float)
+    else: # classification
+        y_train = y_train.astype(int)
+        y_test = y_test.astype(int)
 
     X = np.concatenate([X_train, X_test], axis=0)
     y = np.concatenate([y_train, y_test])
