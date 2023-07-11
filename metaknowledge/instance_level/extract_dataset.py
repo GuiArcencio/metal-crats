@@ -72,11 +72,13 @@ def characterize_dataset(X, y, feature_collection, label_features=True, problem_
             final_features["label_entropy"] = -np.sum(classes_counts * np.log2(classes_counts))
 
     # General features  
+    final_features["number_examples"] = instances
     if feature_collection is None:
         # tsfresh features already include ts length
         final_features["time_series_length"] = length
-    final_features["number_examples"] = instances
-    final_features["number_dimensions"] = dims
+    if problem_type == "regression":
+        # Classification datasets are all univariate
+        final_features["number_dimensions"] = dims
 
     final_features = pd.DataFrame([final_features])
     return final_features
