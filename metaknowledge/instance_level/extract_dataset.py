@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+from tqdm import tqdm
 from tsfresh.feature_extraction import extract_features
 from pycatch22 import catch22_all
 
@@ -13,7 +14,7 @@ def characterize_dataset(X, y, feature_collection, label_features=True, problem_
 
     if feature_collection is None: # Catch22
         features = list()
-        for i in range(instances):
+        for i in tqdm(range(instances), desc="Feature Extraction"):
             transformed_dims = list()
             for dim in range(dims):
                 catch22_results = catch22_all(X[i,dim,:], catch24=True)
