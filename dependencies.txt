@@ -5,3 +5,5 @@ pandas
 tqdm
 pycatch22
 tsfresh
+ipykernel
+matplotlib
