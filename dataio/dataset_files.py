@@ -52,3 +52,7 @@ def write_metadataset(X, features="efficient", problem_type="regression", path=N
 def load_rmses(path="./assets/regression/rmse.csv"):
     rmse = pd.read_csv(path, index_col="regressor")
     return rmse
+
+def load_accs(path="./assets/regression/acc.csv"):
+    acc = pd.read_csv(path, index_col="classifier")
+    return acc
