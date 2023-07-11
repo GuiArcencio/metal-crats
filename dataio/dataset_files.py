@@ -2,20 +2,17 @@ import pandas as pd
 import numpy as np
 import os
 
-from tsml.datasets import load_from_ts_file
+from aeon.datasets import load_from_tsfile
 
 def load_dataset(name, problem_type="regression", path=None):
     if path is None:
         path = f"./assets/{problem_type}/datasets"
 
-    X_train, y_train = load_from_ts_file(f"{path}/{name}/{name}_TRAIN.ts")
-    X_test, y_test = load_from_ts_file(f"{path}/{name}/{name}_TEST.ts")
+    X_train, y_train = load_from_tsfile(f"{path}/{name}/{name}_TRAIN.ts")
+    X_test, y_test = load_from_tsfile(f"{path}/{name}/{name}_TEST.ts")
     if problem_type == "regression":
         y_train = y_train.astype(float)
         y_test = y_test.astype(float)
-    else: # classification
-        y_train = y_train.astype(int)
-        y_test = y_test.astype(int)
 
     X = np.concatenate([X_train, X_test], axis=0)
     y = np.concatenate([y_train, y_test])
