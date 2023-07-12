@@ -34,15 +34,15 @@ def characterize_dataset(X, y, feature_collection, label_features=True, problem_
 
         features = extract_features(
             X_df, 
-            default_fc_parameters={"sample_entropy": None},  #feature_collection,
+            default_fc_parameters=feature_collection,
             column_id="id",
             column_kind="kind",
             column_sort="time",
             column_value="value"
         )
         features = features.fillna(0.)
-        features = features.replace([np.inf], sys.float_info.max)
-        features = features.replace([-np.inf], -sys.float_info.max)
+        features = features.replace([np.inf], 1e20)
+        features = features.replace([-np.inf], -1e20)
 
     final_features = dict()
     for f in features.columns:
