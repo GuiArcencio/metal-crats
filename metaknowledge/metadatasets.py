@@ -20,6 +20,7 @@ def create_metadataset(feature_collection, problem_type="regression", use_label_
     meta_X = pd.concat(meta_X, ignore_index=True)
     meta_X['name'] = datasets
     meta_X = meta_X.set_index('name')
+    meta_X = meta_X.sort_index()
 
     return meta_X
 
