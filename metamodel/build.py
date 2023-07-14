@@ -41,7 +41,7 @@ def build_metamodel(option="1nn", random_state=None):
             ("model", SVC())
         ])
     elif option == "xgb":
-        model = xgb.XGBClassifier(seed=random_state)
+        model = xgb.XGBClassifier(seed=random_state.randint(2**32))
 
     final_model = Pipeline([
         ("variance_selection", variance_selector),

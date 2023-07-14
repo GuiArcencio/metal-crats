@@ -28,5 +28,11 @@ def build_argparser():
         action="store_true",
         help="whether to consider label (class/target) features"
     )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        help="randomization seed",
+        default=None
+    )
 
     return parser

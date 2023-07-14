@@ -4,8 +4,10 @@ import pandas as pd
 from metamodel import build_metamodel
 from sklearn.model_selection import LeaveOneOut
 from sklearn.preprocessing import LabelEncoder
+from sklearn.utils import check_random_state
 
 def run_model_using_loo(X, y, option="1nn", random_state=None):
+    random_state = check_random_state(random_state)
     preds = np.empty_like(y)
     loo = LeaveOneOut()
 

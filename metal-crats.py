@@ -10,7 +10,8 @@ def main():
         args.problem_type,
         args.features,
         args.metamodels,
-        args.use_label_features
+        args.use_label_features,
+        args.seed
     )
 
     os.makedirs("results", exist_ok=True)
