@@ -8,16 +8,19 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 
+import xgboost as xgb
+
 AVAILABLE_METAMODELS = [
     "1nn",
     "5nn",
     "nb",
     "rf",
-    "svm"
+    "svm",
+    "xgb"
 ]
 
 def build_metamodel(option="1nn", random_state=None):
-    feature_selector = VarianceThreshold((1e-5)**2)
+    variance_selector = VarianceThreshold((1e-5)**2)
     if option == "1nn":
         model = Pipeline([
             ("normalizer", StandardScaler()),
@@ -37,9 +40,11 @@ def build_metamodel(option="1nn", random_state=None):
             ("normalizer", StandardScaler()),
             ("model", SVC())
         ])
+    elif option == "xgb":
+        model = xgb.XGBClassifier(seed=random_state)
 
     final_model = Pipeline([
-        ("feature_selection", feature_selector),
+        ("variance_selection", variance_selector),
         ("classifier", model)
     ])
 

@@ -1,26 +1,9 @@
 import pandas as pd
-import os
 
-from app import build_argparser
 from dataio import check_metadataset_ready, load_metadataset, write_metadataset, load_rmses, load_accs
 
 from metaknowledge import create_metadataset, FEATURES
 from metamodel import run_model_using_loo, best_classifiers_to_acc, best_regressors_to_rmse
-
-def reproduce_experiment_with_args():
-    parser = build_argparser() 
-    args = parser.parse_args()
-
-    results = reproduce_experiment(
-        args.problem_type,
-        args.features,
-        args.metamodels,
-        args.use_label_features
-    )
-
-    os.makedirs("results", exist_ok=True)
-    for filename, df in results.items():
-        df.to_csv(f"results/{filename}.csv")
 
 def reproduce_experiment(problem_type, features, metamodels, use_label_features):
     all_results = dict()

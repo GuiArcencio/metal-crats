@@ -19,7 +19,7 @@ def build_argparser():
     )
     parser.add_argument(
         "--metamodels",
-        choices=["1nn", "5nn", "rf", "nb", "svm"],
+        choices=["1nn", "5nn", "rf", "nb", "svm", "xgb"],
         nargs="*",
         help="which model(s) to use for metalearning"
     )
