@@ -5,5 +5,7 @@ pandas
 tqdm
 pycatch22
 tsfresh
+xgboost
 ipykernel
 matplotlib
+gdown
