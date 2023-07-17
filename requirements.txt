@@ -15,6 +15,7 @@ debugpy==1.6.7
 decorator==5.1.1
 Deprecated==1.2.14
 distributed==2023.7.0
+drawsvg==2.2.0
 executing==1.2.0
 filelock==3.12.2
 fonttools==4.41.0
@@ -37,6 +38,7 @@ matplotlib==3.7.2
 matplotlib-inline==0.1.6
 msgpack==1.0.5
 nest-asyncio==1.5.6
+networkx==3.1
 numba==0.57.1
 numpy==1.24.4
 packaging==23.1
@@ -63,6 +65,7 @@ pyzmq==25.1.0
 requests==2.31.0
 scikit-learn==1.2.2
 scipy==1.11.1
+seaborn==0.12.2
 six==1.16.0
 sortedcontainers==2.4.0
 soupsieve==2.4.1
