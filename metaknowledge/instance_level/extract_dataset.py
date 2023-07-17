@@ -13,7 +13,7 @@ def characterize_dataset(X, y, feature_collection, label_features=True, problem_
     """
     instances, dims, length = X.shape
 
-    if feature_collection is None: # Catch22
+    if feature_collection in ["catch22", "catch22+"]:
         features = list()
         for i in tqdm(range(instances), desc="Feature Extraction"):
             transformed_dims = list()
@@ -56,6 +56,14 @@ def characterize_dataset(X, y, feature_collection, label_features=True, problem_
             )
             final_features[f"mean_{feature_name_proper}"] = np.mean(all_dims)
             final_features[f"std_{feature_name_proper}"] = np.std(all_dims)
+            if feature_collection == "catch22+":
+                final_features[f"median_{feature_name_proper}"] = np.median(all_dims)
+                final_features[f"q1_{feature_name_proper}"] = np.percentile(all_dims, 25)
+                final_features[f"q3_{feature_name_proper}"] = np.percentile(all_dims, 75)
+                final_features[f"max_{feature_name_proper}"] = np.max(all_dims, 75)
+                final_features[f"min_{feature_name_proper}"] = np.min(all_dims, 75)
+                
+
     
     # Label features
     if label_features:
@@ -76,7 +84,7 @@ def characterize_dataset(X, y, feature_collection, label_features=True, problem_
 
     # General features  
     final_features["number_examples"] = instances
-    if feature_collection is None:
+    if feature_collection in ["catch22", "catch22+"]:
         # tsfresh features already include ts length
         final_features["time_series_length"] = length
     if problem_type == "regression":

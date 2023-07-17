@@ -4,5 +4,6 @@ FEATURES = {
     "efficient": EfficientFCParameters(),
     "minimal": MinimalFCParameters(),
     "comprehensive": ComprehensiveFCParameters(),
-    "catch22": None,
+    "catch22": "catch22",
+    "catch22+": "catch22+"
 }
