@@ -57,9 +57,9 @@ def characterize_dataset(X, y, feature_collection, label_features=True, problem_
             final_features[f"mean_{feature_name_proper}"] = np.mean(all_dims)
             final_features[f"std_{feature_name_proper}"] = np.std(all_dims)
             if feature_collection == "catch22+":
-                final_features[f"median_{feature_name_proper}"] = np.median(all_dims)
-                final_features[f"q1_{feature_name_proper}"] = np.percentile(all_dims, 25)
-                final_features[f"q3_{feature_name_proper}"] = np.percentile(all_dims, 75)
+                final_features[f"median_{feature_name_proper}"] = np.nanmedian(all_dims)
+                final_features[f"q1_{feature_name_proper}"] = np.nanpercentile(all_dims, 25)
+                final_features[f"q3_{feature_name_proper}"] = np.nanpercentile(all_dims, 75)
                 final_features[f"max_{feature_name_proper}"] = np.max(all_dims)
                 final_features[f"min_{feature_name_proper}"] = np.min(all_dims)
                 
