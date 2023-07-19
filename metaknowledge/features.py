@@ -5,5 +5,4 @@ FEATURES = {
     "minimal": MinimalFCParameters(),
     "comprehensive": ComprehensiveFCParameters(),
     "catch22": "catch22",
-    "catch22+": "catch22+"
 }

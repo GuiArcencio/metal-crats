@@ -47,6 +47,7 @@ def reproduce_experiment(problem_type, features, metamodels, use_label_features,
             results = results.set_index("dataset")
 
             label_string = "label" if use_label_features else "nolabel"
-            all_results[f"{problem_type}_{label_string}_{feature_collection}_{model}"] = results
+            seed_string = f"_{seed}" if model in ["xgb", "rf"] else ""
+            all_results[f"{problem_type}_{label_string}_{feature_collection}_{model}{seed_string}"] = results
 
     return all_results
