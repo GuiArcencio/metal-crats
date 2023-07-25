@@ -6,6 +6,8 @@ tqdm
 pycatch22
 tsfresh
 xgboost
+
+# Notebooks
 ipykernel
 matplotlib
 seaborn
