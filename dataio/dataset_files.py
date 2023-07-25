@@ -53,6 +53,6 @@ def load_rmses(path="./assets/regression/rmse.csv"):
     rmse = pd.read_csv(path, index_col="regressor")
     return rmse
 
-def load_accs(path="./assets/regression/acc.csv"):
+def load_accs(path="./assets/classification/acc.csv"):
     acc = pd.read_csv(path, index_col="classifier")
     return acc
