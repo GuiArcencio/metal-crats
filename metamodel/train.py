@@ -34,7 +34,7 @@ def best_regressors_to_rmse(y_pred, rmses):
 
 def best_classifiers_to_acc(y_pred, accs):
     acc = []
-    for model, dataset in zip(y_pred, sorted(accs.column)):
+    for model, dataset in zip(y_pred, sorted(accs.columns)):
         acc.append(accs[dataset][model])
 
     return np.array(acc)
