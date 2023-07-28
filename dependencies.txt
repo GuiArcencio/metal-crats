@@ -12,6 +12,5 @@ ipykernel
 matplotlib
 seaborn
 gdown
-drawsvg
 scipy
-networkx
+baycomp
